@@ -1,5 +1,5 @@
-﻿FROM php:8.2-cli
+﻿FROM php:8.2-apache
 RUN docker-php-ext-install pdo pdo_mysql mysqli
-COPY . /app
-WORKDIR /app
-CMD ["php", "-S", "0.0.0.0:8080", "router.php"]
+RUN a2enmod headers rewrite
+COPY . /var/www/html/
+RUN echo 'ServerName localhost' >> /etc/apache2/apache2.conf
