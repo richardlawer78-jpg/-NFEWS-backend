@@ -12,7 +12,15 @@ $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $file = __DIR__ . $uri;
 
 if (is_file($file)) {
-    return false;
+    require $file;
+    exit;
 }
 
-include __DIR__ . $uri . '.php';
+$phpFile = __DIR__ . $uri . '.php';
+if (is_file($phpFile)) {
+    require $phpFile;
+    exit;
+}
+
+http_response_code(404);
+echo json_encode(['error' => 'Not found']);
