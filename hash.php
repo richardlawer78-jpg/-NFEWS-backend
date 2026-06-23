@@ -1,0 +1,1 @@
+<?php echo password_hash('nfews2026', PASSWORD_BCRYPT);
